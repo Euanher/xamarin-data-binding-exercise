@@ -5,7 +5,14 @@ namespace FlagData
     /// <summary>
     /// This model object represents a single flag
     /// </summary>
-    public class Flag
+    public class Flag : INotifyPropertyChanged
+    {
+    public event PropertyChangedEventHandler PropertyChanged;
+    private void RaisePropertyChanged ([CallerMemberName] string propertyName = " ")
+    {
+    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertName));
+    }
+    }    
     {
         /// <summary>
         /// Name of the country that this flag belongs to
@@ -18,7 +25,16 @@ namespace FlagData
         /// <summary>
         /// The date this flag was adopted
         /// </summary>
-        public DateTime DateAdopted { get; set; }
+        public DateTime DateAdopted { get;{return _dateAdopted;}
+                                     set; 
+                                     {
+                                         if (_dateAdopted != value)
+                                         {
+                                             _dateAdopted = value;
+                                             RaisePropertyChanged();
+                                         }
+                                     }
+                                    }
         /// <summary>
         /// Whether the flag includes an image/shield as part of the design
         /// </summary>

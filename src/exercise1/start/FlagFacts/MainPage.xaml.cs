@@ -31,19 +31,19 @@ namespace FlagFacts
 
         private void InitializeData()
         {
-            country.ItemsSource = (IList) repository.Countries;
-            country.SelectedItem = CurrentFlag.Country;
-            country.SelectedIndexChanged += (s, e) => CurrentFlag.Country = repository.Countries[country.SelectedIndex];
+            ItemsSource = (IList) repository.Countries;
+            SelectedItem = CurrentFlag;
+            SelectedIndexChanged += (s, e) => CurrentFlag = repository.Countries[SelectedIndex];
 
             flagImage.Source = CurrentFlag.GetImageSource();
 
-            adopted.Date = CurrentFlag.DateAdopted;
-            adopted.DateSelected += (s, e) => CurrentFlag.DateAdopted = e.NewDate;
+            Date = CurrentFlag.Date;
+            DateSelected += (s, e) => CurrentFlag.Date = e.NewDate;
 
-            hasShield.IsToggled = CurrentFlag.IncludesShield;
-            hasShield.Toggled += (s, e) => CurrentFlag.IncludesShield = hasShield.IsToggled;
+            IsToggled = CurrentFlag.IncludesShield;
+            Toggled += (s, e) => CurrentFlag.IncludesShield = IsToggled;
 
-            description.Text = CurrentFlag.Description;
+            Text = CurrentFlag;
         }
 
         private async void OnShow(object sender, EventArgs e)
